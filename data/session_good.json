@@ -1,0 +1,22 @@
+{
+  "session_id": "demo-good",
+  "learner_id": "synthetic-001",
+  "scenario_id": "training-01-v1",
+  "events": [
+    {
+      "event_id": "e1",
+      "action": "recognize_alarm",
+      "t_s": 3
+    },
+    {
+      "event_id": "e2",
+      "action": "notify_instructor",
+      "t_s": 10
+    },
+    {
+      "event_id": "e3",
+      "action": "leave_zone",
+      "t_s": 25
+    }
+  ]
+}

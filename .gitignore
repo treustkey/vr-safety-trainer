@@ -1,0 +1,8 @@
+UnityClient/[Ll]ibrary/
+UnityClient/[Tt]emp/
+UnityClient/[Oo]bj/
+UnityClient/[Ll]ogs/
+UnityClient/[Uu]ser[Ss]ettings/
+__pycache__/
+*.pyc
+.DS_Store

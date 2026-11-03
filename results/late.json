@@ -1,0 +1,32 @@
+{
+  "session_id": "demo-late",
+  "learner_id": "synthetic-001",
+  "scenario_id": "training-01-v1",
+  "score": 60.0,
+  "passed": false,
+  "recommendation": "repeat_training",
+  "missing": [],
+  "critical_failed": [
+    "leave_zone"
+  ],
+  "events": [
+    {
+      "event_id": "e1",
+      "action": "recognize_alarm",
+      "t_s": 3,
+      "status": "ok"
+    },
+    {
+      "event_id": "e2",
+      "action": "notify_instructor",
+      "t_s": 10,
+      "status": "ok"
+    },
+    {
+      "event_id": "e3",
+      "action": "leave_zone",
+      "t_s": 41,
+      "status": "late"
+    }
+  ]
+}

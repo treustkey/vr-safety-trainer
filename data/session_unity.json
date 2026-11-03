@@ -1,0 +1,22 @@
+{
+    "session_id": "c7714a1f-d629-4b16-941c-214f97399918",
+    "learner_id": "synthetic-001",
+    "scenario_id": "training-01-v1",
+    "events": [
+        {
+            "event_id": "6fe843ab-331b-4902-9b1e-77eaed2600b0",
+            "action": "recognize_alarm",
+            "t_s": 11.567445755004883
+        },
+        {
+            "event_id": "9e0cd16f-bf2a-493b-baae-9bf7d701a32c",
+            "action": "notify_instructor",
+            "t_s": 35.69139862060547
+        },
+        {
+            "event_id": "a5fdffc6-f504-4fb5-bf03-9b4471f2ecc3",
+            "action": "leave_zone",
+            "t_s": 46.175846099853519
+        }
+    ]
+}

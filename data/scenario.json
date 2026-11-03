@@ -1,0 +1,25 @@
+{
+  "scenario_id": "training-01-v1",
+  "title": "Учебная последовательность реагирования",
+  "pass_score": 80,
+  "steps": [
+    {
+      "action": "recognize_alarm",
+      "weight": 20,
+      "deadline_s": 5,
+      "critical": false
+    },
+    {
+      "action": "notify_instructor",
+      "weight": 40,
+      "deadline_s": 15,
+      "critical": true
+    },
+    {
+      "action": "leave_zone",
+      "weight": 40,
+      "deadline_s": 40,
+      "critical": true
+    }
+  ]
+}
