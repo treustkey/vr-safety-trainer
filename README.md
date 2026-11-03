@@ -32,4 +32,13 @@ python analytics/assess.py --scenario data/scenario.json --session data/session_
 - `results/*.json`, `tests.txt`, `verification.html` — фактический вывод запуска.
 - `screenshots/` — снимки приложений, включённые в отчёт.
 
-Репозиторий локальный. Удалённый GitHub-репозиторий и публикация не создавались. История доступна командой `git log --oneline`.
+Репозиторий GitHub: https://github.com/treustkey/vr-safety-trainer. Доступ закрытый, владелец — treustkey. История также сохранена локально и доступна командой `git log --oneline`.
+
+После предоставления доступа проект можно получить командой:
+
+```console
+git clone https://github.com/treustkey/vr-safety-trainer.git
+cd vr-safety-trainer
+```
+
+Затем выполните команды проверки из начала этого документа. Для доступа преподавателю нужно предоставить доступ к закрытому репозиторию.
