@@ -6,3 +6,6 @@ UnityClient/[Uu]ser[Ss]ettings/
 __pycache__/
 *.pyc
 .DS_Store
+
+# Generated assessment output
+results/
