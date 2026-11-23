@@ -5,8 +5,8 @@ import unittest
 from assess import evaluate_session, summarize_reports
 
 ROOT = Path(__file__).resolve().parents[1]
-SCENARIO = json.loads((ROOT/'data/scenario.json').read_text())
-GOOD = json.loads((ROOT/'data/session_good.json').read_text())
+SCENARIO = json.loads((ROOT/'data/scenario.json').read_text(encoding="utf-8"))
+GOOD = json.loads((ROOT/'data/session_good.json').read_text(encoding="utf-8"))
 
 
 class AssessmentTests(unittest.TestCase):
@@ -66,6 +66,41 @@ class AssessmentTests(unittest.TestCase):
         s = copy.deepcopy(GOOD)
         for event, step in zip(s['events'], SCENARIO['steps']): event['t_s'] = step['deadline_s']
         self.assertTrue(evaluate_session(SCENARIO, s)['passed'])
+
+    def test_invalid_container_types(self):
+        examples = (
+            ([], GOOD, 'objects'),
+            (SCENARIO, None, 'objects'),
+            (dict(SCENARIO, steps={}), GOOD, 'steps'),
+            (dict(SCENARIO, steps=[None]), GOOD, 'step'),
+            (SCENARIO, dict(GOOD, events={}), 'events'),
+            (SCENARIO, dict(GOOD, events=[None]), 'event'),
+        )
+        for scenario, session, message in examples:
+            with self.subTest(message=message):
+                with self.assertRaisesRegex(ValueError, message):
+                    evaluate_session(scenario, session)
+
+    def test_invalid_required_field_types(self):
+        for field, value in (('session_id', None), ('learner_id', 5), ('scenario_id', [])):
+            with self.subTest(field=field):
+                with self.assertRaisesRegex(ValueError, field):
+                    evaluate_session(SCENARIO, dict(GOOD, **{field: value}))
+        for field, value in (('event_id', 5), ('action', []), ('t_s', '3')):
+            event = dict(GOOD['events'][0], **{field: value})
+            with self.subTest(field=field):
+                with self.assertRaises(ValueError):
+                    evaluate_session(SCENARIO, dict(GOOD, events=[event]))
+        for field, value in (('action', []), ('critical', 0), ('weight', True), ('deadline_s', '5')):
+            step = dict(SCENARIO['steps'][0], **{field: value})
+            with self.subTest(field=field):
+                with self.assertRaisesRegex(ValueError, field):
+                    evaluate_session(dict(SCENARIO, steps=[step]), GOOD)
+        with self.assertRaisesRegex(ValueError, 'threshold'):
+            evaluate_session(dict(SCENARIO, pass_score='80'), GOOD)
+        journal = {key: value for key, value in GOOD.items() if key != 'events'}
+        with self.assertRaisesRegex(ValueError, 'events'):
+            evaluate_session(SCENARIO, journal)
 
     def test_empty_summary(self):
         self.assertEqual(summarize_reports([]), dict(sessions=0, passed=0, mean_score=None))
